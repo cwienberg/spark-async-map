@@ -65,8 +65,7 @@ private[async] class BatchAsyncMapIterator[A, B](
   bufferSize: Int = BatchAsyncMapIterator.DEFAULT_BUFFER_SIZE
 ) extends Iterator[B] {
 
-  private[this] val buffer: mutable.Queue[Future[B]] =
-    new mutable.Queue(bufferSize)
+  private[this] val buffer: mutable.Queue[Future[B]] = mutable.Queue()
   while (input.hasNext && (buffer.size < bufferSize - 1)) {
     shiftToBuffer()
   }
