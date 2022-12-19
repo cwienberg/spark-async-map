@@ -6,7 +6,9 @@ import org.apache.spark.sql.Dataset
 import scala.language.implicitConversions
 
 object implicits {
-  implicit def datasetToAsyncMapDataset[A](dataset: Dataset[A]): AsyncMapDataset[A] = {
+  implicit def datasetToAsyncMapDataset[A](
+    dataset: Dataset[A]
+  ): AsyncMapDataset[A] = {
     AsyncMapDataset.datasetToAsyncMapDataset(dataset)
   }
 
@@ -14,7 +16,9 @@ object implicits {
     AsyncMapRDD.rddToAsyncMapRDD(rdd)
   }
 
-  implicit def rddToAsyncMapValuesPairRDD[K, V](rdd: RDD[(K, V)]): AsyncMapValuesPairRDD[K, V] = {
+  implicit def rddToAsyncMapValuesPairRDD[K, V](
+    rdd: RDD[(K, V)]
+  ): AsyncMapValuesPairRDD[K, V] = {
     AsyncMapValuesPairRDD.rddToAsyncMapValuesPairRDD(rdd)
   }
 }
