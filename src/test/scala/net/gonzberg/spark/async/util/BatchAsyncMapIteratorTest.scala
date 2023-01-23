@@ -15,7 +15,7 @@ class BatchAsyncMapIteratorTest extends AnyFunSuite with Matchers {
   implicit val testExecutionContext: ExecutionContext = ExecutionContext.fromExecutorService(Executors.newSingleThreadExecutor())
 
   test("testApplyEmpty") {
-    val actualOutput = BatchAsyncMapIterator.apply(Iterator.empty[Int], (x: Int) => x * 3, BUFFER_SIZE).toVector
+    val actualOutput = BatchAsyncMapIterator.apply[Int,Int](Iterator.empty, (x: Int) => x * 3, BUFFER_SIZE).toVector
     assert(actualOutput.isEmpty)
   }
 
@@ -25,7 +25,7 @@ class BatchAsyncMapIteratorTest extends AnyFunSuite with Matchers {
   }
 
   test("testDelegateEmpty") {
-    val actualOutput = BatchAsyncMapIterator.delegate(Iterator.empty[Int], (x: Int) => Future{x * 3}, BUFFER_SIZE).toVector
+    val actualOutput = BatchAsyncMapIterator.delegate[Int,Int](Iterator.empty, (x: Int) => Future{x * 3}, BUFFER_SIZE).toVector
     assert(actualOutput.isEmpty)
   }
 
