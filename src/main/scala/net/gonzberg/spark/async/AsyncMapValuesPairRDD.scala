@@ -15,6 +15,13 @@ private[async] object AsyncMapValuesPairRDD {
 }
 
 final class AsyncMapValuesPairRDD[K, V](rdd: RDD[(K, V)]) extends Serializable {
+
+  /** Runs map over the RDD's values in a threadpool, e.g. to parallelize blocking IO.
+    * @param op The function to run
+    * @param batchSize The size of the threadpool (i.e. the amount of parallel execution within each executor core)
+    * @tparam B The result type of the map operation
+    * @return A new RDD of key-value pairs, having applied op to all values of this RDD
+    */
   implicit def asyncMapValues[U: ClassTag](
     op: V => U,
     batchSize: Int = 1

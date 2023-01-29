@@ -13,6 +13,13 @@ private[async] object AsyncMapRDD {
 }
 
 final class AsyncMapRDD[A](rdd: RDD[A]) extends Serializable {
+
+  /** Runs map over the RDD in a threadpool, e.g. to parallelize blocking IO.
+    * @param op The function to run
+    * @param batchSize The size of the threadpool (i.e. the amount of parallel execution within each executor core)
+    * @tparam B The result type of the map operation
+    * @return A new RDD, having applied op to all elements of this RDD
+    */
   implicit def asyncMap[B: ClassTag](op: A => B, batchSize: Int = 1): RDD[B] = {
     rdd.mapPartitions { partition =>
       BatchAsyncMapIterator.apply(partition, op, batchSize)
