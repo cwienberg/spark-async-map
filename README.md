@@ -12,7 +12,7 @@ import net.gonzberg.spark.async.implicits._
 
 You can then call additional functions on certain RDDs or Datasets, e.g.
 ```scala
-val ds: Dataset[Integer] = ?
+val ds: Dataset[Integer] = ???
 val dsTimesThree = ds.asyncMap(_ * 3, batchSize = 5)
 ```
 
