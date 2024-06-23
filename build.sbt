@@ -19,7 +19,7 @@ def sparkDependency(scalaVersion: String): String = {
   }
 }
 
-lazy val scalatestVersion = "3.2.17"
+lazy val scalatestVersion = "3.2.19"
 
 ThisBuild / organization := "net.gonzberg"
 ThisBuild / homepage := Some(url("https://github.com/cwienberg/spark-async-map"))
